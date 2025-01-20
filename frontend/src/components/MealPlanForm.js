@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const steps = [
   'Plan Duration',
@@ -26,6 +26,19 @@ const cuisineTypes = [
   'American'
 ];
 
+const loadingMessages = [
+  "Whisking together your preferences into a perfect meal plan...",
+  "Sautéing your health goals with a dash of cultural flavors...",
+  "Spinning grandma's wisdom with a splash of AI magic...",
+  "Simmering the perfect blend of recipes tailored just for you...",
+  "Chopping through recipe books to find your ideal bites...",
+  "Mixing ancient recipes with cutting-edge tech...",
+  "Consulting every chef, cookbook, and search engine to serve you the best...",
+  "Loading up flavors, one byte at a time...",
+  "Fetching the freshest recipes from our culinary database...",
+  "Cooking up a storm of ideas for your plate..."
+];
+
 function MealPlanForm() {
   const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState({
@@ -36,6 +49,25 @@ function MealPlanForm() {
     includeCheatMeal: false
   });
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [mealPlan, setMealPlan] = useState(null);
+  const [error, setError] = useState(null);
+  const [loadingMessage, setLoadingMessage] = useState("");
+
+  useEffect(() => {
+    if (isLoading) {
+      const cycleMessages = () => {
+        const randomIndex = Math.floor(Math.random() * loadingMessages.length);
+        setLoadingMessage(loadingMessages[randomIndex]);
+      };
+
+      cycleMessages();
+
+      const interval = setInterval(cycleMessages, 3000);
+
+      return () => clearInterval(interval);
+    }
+  }, [isLoading]);
 
   const validateStep = (step) => {
     const newErrors = {};
@@ -90,11 +122,34 @@ function MealPlanForm() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateStep(activeStep)) {
-      console.log('Form submitted:', formData);
-      // We'll add API call here later
+      setIsLoading(true);
+      setError(null);
+      
+      try {
+        const response = await fetch('http://localhost:8000/api/meal-plan', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to generate meal plan');
+        }
+
+        const data = await response.json();
+        setMealPlan(data);
+        // Move to results display
+        setActiveStep(steps.length);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -122,6 +177,33 @@ function MealPlanForm() {
         setErrors({ ...errors, [name]: '' }); // Clear error when value changes
       }
     }
+  };
+
+  const downloadCSV = () => {
+    if (!mealPlan) return;
+
+    // Create CSV content with ingredients and recipe steps
+    let csvContent = "Day,Meal Type,Dish Name,Cuisine,Calories,Protein,Carbs,Fat,Ingredients,Recipe Steps\n";
+    
+    mealPlan.meal_plan.forEach(day => {
+      day.meals.forEach(meal => {
+        const ingredients = meal.ingredients.map(ing => `${ing.amount} ${ing.item}`).join('; ');
+        const steps = meal.recipe_steps.join('; ');
+        csvContent += `${day.day},${meal.type},"${meal.name}",${meal.cuisine},${meal.calories},${meal.nutrition.protein},${meal.nutrition.carbs},${meal.nutrition.fat},"${ingredients}","${steps}"\n`;
+      });
+      csvContent += `${day.day},Daily Total,,,,${day.total_calories},,,\n`;
+    });
+
+    // Create and trigger download
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'meal_plan.csv');
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const renderStepContent = () => {
@@ -226,42 +308,164 @@ function MealPlanForm() {
     }
   };
 
+  const renderResults = () => {
+    if (error) {
+      return (
+        <div className="error-message">
+          <h3>Error generating meal plan</h3>
+          <p>{error}</p>
+          <button onClick={() => setActiveStep(0)} className="nav-button">
+            Start Over
+          </button>
+        </div>
+      );
+    }
+
+    if (mealPlan) {
+      return (
+        <div className="meal-plan-results">
+          <h3>Your Custom Meal Plan</h3>
+          {mealPlan.meal_plan.map((day, index) => (
+            <div key={index} className="day-plan">
+              <h4>Day {day.day}</h4>
+              <div className="meal-plan-container">
+                <table className="meal-table">
+                  <thead>
+                    <tr>
+                      <th>Meal Type</th>
+                      <th>Dish Name</th>
+                      <th>Cuisine</th>
+                      <th>Calories</th>
+                      <th>Protein</th>
+                      <th>Carbs</th>
+                      <th>Fat</th>
+                      <th>Details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {day.meals.map((meal, mealIndex) => (
+                      <React.Fragment key={mealIndex}>
+                        <tr>
+                          <td className="meal-type">{meal.type}</td>
+                          <td className="meal-name">{meal.name}</td>
+                          <td className="cuisine">{meal.cuisine}</td>
+                          <td>{meal.calories}</td>
+                          <td>{meal.nutrition.protein}</td>
+                          <td>{meal.nutrition.carbs}</td>
+                          <td>{meal.nutrition.fat}</td>
+                          <td>
+                            <button 
+                              className="details-button"
+                              onClick={() => {
+                                const element = document.getElementById(`recipe-${day.day}-${mealIndex}`);
+                                element.style.display = element.style.display === 'none' ? 'block' : 'none';
+                              }}
+                            >
+                              Show Recipe
+                            </button>
+                          </td>
+                        </tr>
+                        <tr id={`recipe-${day.day}-${mealIndex}`} className="recipe-details" style={{display: 'none'}}>
+                          <td colSpan="8">
+                            <div className="recipe-content">
+                              <div className="ingredients">
+                                <h5>Ingredients:</h5>
+                                <ul>
+                                  {meal.ingredients.map((ing, i) => (
+                                    <li key={i}>{ing.amount} {ing.item}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                              <div className="recipe-steps">
+                                <h5>Recipe Steps:</h5>
+                                <ol>
+                                  {meal.recipe_steps.map((step, i) => (
+                                    <li key={i}>{step}</li>
+                                  ))}
+                                </ol>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </React.Fragment>
+                    ))}
+                    <tr className="total-row">
+                      <td colSpan="3">Daily Total</td>
+                      <td>{day.total_calories}</td>
+                      <td colSpan="4"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ))}
+          <div className="action-buttons">
+            <button onClick={downloadCSV} className="nav-button secondary">
+              Download as CSV
+            </button>
+            <button 
+              onClick={() => {
+                setMealPlan(null);
+                setActiveStep(0);
+              }} 
+              className="nav-button primary"
+            >
+              Generate New Plan
+            </button>
+          </div>
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="meal-plan-form">
-      <div className="stepper">
-        {steps.map((label, index) => (
-          <div 
-            key={label} 
-            className={`step ${index === activeStep ? 'active' : ''} ${index < activeStep ? 'completed' : ''}`}
-          >
-            {label}
+      {isLoading ? (
+        <div className="loading">
+          <div className="loading-message">
+            {loadingMessage}
           </div>
-        ))}
-      </div>
-
-      <form onSubmit={(e) => e.preventDefault()}>
-        <div className="form-content">
-          {renderStepContent()}
         </div>
+      ) : activeStep === steps.length ? (
+        renderResults()
+      ) : (
+        <>
+          <div className="stepper">
+            {steps.map((label, index) => (
+              <div 
+                key={label} 
+                className={`step ${index === activeStep ? 'active' : ''} ${index < activeStep ? 'completed' : ''}`}
+              >
+                {label}
+              </div>
+            ))}
+          </div>
 
-        <div className="form-navigation">
-          <button 
-            type="button"
-            onClick={handleBack}
-            disabled={activeStep === 0}
-            className="nav-button"
-          >
-            Back
-          </button>
-          <button 
-            type="button"
-            onClick={activeStep === steps.length - 1 ? handleSubmit : handleNext}
-            className="nav-button primary"
-          >
-            {activeStep === steps.length - 1 ? 'Generate Plan' : 'Next'}
-          </button>
-        </div>
-      </form>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <div className="form-content">
+              {renderStepContent()}
+            </div>
+
+            <div className="form-navigation">
+              <button 
+                type="button"
+                onClick={handleBack}
+                disabled={activeStep === 0}
+                className="nav-button"
+              >
+                Back
+              </button>
+              <button 
+                type="button"
+                onClick={activeStep === steps.length - 1 ? handleSubmit : handleNext}
+                className="nav-button primary"
+              >
+                {activeStep === steps.length - 1 ? 'Generate Plan' : 'Next'}
+              </button>
+            </div>
+          </form>
+        </>
+      )}
     </div>
   );
 }

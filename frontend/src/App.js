@@ -5,7 +5,7 @@ import MealPlanForm from './components/MealPlanForm';
 function App() {
   return (
     <div className="App">
-      <h1>Custom Meal Plan Generator</h1>
+      <h1>Meal Plan Logic</h1>
       <MealPlanForm />
     </div>
   );

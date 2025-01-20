@@ -1,16 +1,17 @@
 .App {
   text-align: center;
   padding: 40px 20px;
-  background-color: #f8f9fa;
+  background-color: #2F4F4F;  /* Dark Slate Gray (bottle green) */
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-h1 {
-  color: #333;
+.App h1 {
+  color: white;
   margin-bottom: 40px;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .meal-plan-form {
@@ -200,3 +201,236 @@ body {
     padding: 20px 15px;
   }
 }
+
+/* Add these new styles to your existing CSS */
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-message {
+  font-size: 1.2rem;
+  color: #007bff;
+  font-style: italic;
+  max-width: 600px;
+  margin: 0 auto;
+  animation: fadeInOut 3s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 4px solid #007bff;
+  width: 40px;
+  height: 40px;
+  margin: 20px auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.meal-plan-results {
+  padding: 20px;
+}
+
+.day-plan {
+  margin-bottom: 40px;
+}
+
+.day-plan h4 {
+  color: #333;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #007bff;
+}
+
+.meal-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.meal-table th,
+.meal-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.meal-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+}
+
+.meal-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.meal-table .meal-type {
+  text-transform: capitalize;
+  color: #007bff;
+  font-weight: 500;
+}
+
+.meal-table .meal-name {
+  font-weight: 500;
+}
+
+.meal-table .cuisine {
+  font-style: italic;
+  color: #666;
+}
+
+.total-row {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.total-row td {
+  border-bottom: none;
+}
+
+.action-buttons {
+  margin-top: 30px;
+  text-align: center;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.meal-card {
+  background: white;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.meal-card h5 {
+  margin: 0;
+  color: #007bff;
+  text-transform: capitalize;
+}
+
+.meal-name {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 10px 0;
+}
+
+.cuisine {
+  color: #666;
+  font-style: italic;
+}
+
+.nutrition {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.total-calories {
+  text-align: right;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.error-message {
+  text-align: center;
+  color: #dc3545;
+  padding: 20px;
+}
+
+.nav-button.secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.nav-button.secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Add these new styles */
+
+.recipe-details {
+  background-color: #f8f9fa;
+}
+
+.recipe-content {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.ingredients, .recipe-steps {
+  text-align: left;
+}
+
+.ingredients h5, .recipe-steps h5 {
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.ingredients ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.recipe-steps ol {
+  padding-left: 20px;
+}
+
+.recipe-steps li {
+  margin-bottom: 8px;
+}
+
+.details-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.details-button:hover {
+  background: #0056b3;
+}
+
+/* Update the downloadCSV function to include the new fields */
