@@ -1,0 +1,622 @@
+{
+  "meal_plan": [
+    {
+      "day": 1,
+      "meals": [
+        {
+          "type": "breakfast",
+          "name": "Dal Parantha",
+          "cuisine": "Indian",
+          "calories": 600,
+          "nutrition": {
+            "protein": "20g",
+            "carbs": "80g",
+            "fat": "15g"
+          },
+          "ingredients": [
+            {
+              "item": "Whole wheat flour",
+              "amount": "100g"
+            },
+            {
+              "item": "Lentils",
+              "amount": "50g"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        },
+        {
+          "type": "lunch",
+          "name": "Chana Masala",
+          "cuisine": "Indian",
+          "calories": 700,
+          "nutrition": {
+            "protein": "30g",
+            "carbs": "90g",
+            "fat": "20g"
+          },
+          "ingredients": [
+            {
+              "item": "Chickpeas",
+              "amount": "150g"
+            },
+            {
+              "item": "Onions",
+              "amount": "100g"
+            },
+            {
+              "item": "Tomatoes",
+              "amount": "100g"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        },
+        {
+          "type": "dinner",
+          "name": "Fish Curry",
+          "cuisine": "Indian",
+          "calories": 700,
+          "nutrition": {
+            "protein": "25g",
+            "carbs": "60g",
+            "fat": "30g"
+          },
+          "ingredients": [
+            {
+              "item": "Fish",
+              "amount": "150g"
+            },
+            {
+              "item": "Coconut milk",
+              "amount": "200ml"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        }
+      ],
+      "total_calories": 2000
+    },
+    {
+      "day": 2,
+      "meals": [
+        {
+          "type": "breakfast",
+          "name": "Rava Upma",
+          "cuisine": "Indian",
+          "calories": 600,
+          "nutrition": {
+            "protein": "15g",
+            "carbs": "80g",
+            "fat": "20g"
+          },
+          "ingredients": [
+            {
+              "item": "Semolina",
+              "amount": "100g"
+            },
+            {
+              "item": "Mixed vegetables",
+              "amount": "100g"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        },
+        {
+          "type": "lunch",
+          "name": "Vegetable Biryani",
+          "cuisine": "Indian",
+          "calories": 700,
+          "nutrition": {
+            "protein": "20g",
+            "carbs": "100g",
+            "fat": "20g"
+          },
+          "ingredients": [
+            {
+              "item": "Basmati Rice",
+              "amount": "150g"
+            },
+            {
+              "item": "Mixed vegetables",
+              "amount": "100g"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        },
+        {
+          "type": "dinner",
+          "name": "Palak Paneer",
+          "cuisine": "Indian",
+          "calories": 700,
+          "nutrition": {
+            "protein": "30g",
+            "carbs": "60g",
+            "fat": "25g"
+          },
+          "ingredients": [
+            {
+              "item": "Paneer",
+              "amount": "100g"
+            },
+            {
+              "item": "Spinach",
+              "amount": "200g"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        }
+      ],
+      "total_calories": 2000
+    },
+    {
+      "day": 3,
+      "meals": [
+        {
+          "type": "breakfast",
+          "name": "Idli Sambar",
+          "cuisine": "Indian",
+          "calories": 600,
+          "nutrition": {
+            "protein": "15g",
+            "carbs": "80g",
+            "fat": "20g"
+          },
+          "ingredients": [
+            {
+              "item": "Idli batter",
+              "amount": "150g"
+            },
+            {
+              "item": "Sambar",
+              "amount": "150g"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        },
+        {
+          "type": "lunch",
+          "name": "Chicken Tikka Masala",
+          "cuisine": "Indian",
+          "calories": 700,
+          "nutrition": {
+            "protein": "30g",
+            "carbs": "70g",
+            "fat": "30g"
+          },
+          "ingredients": [
+            {
+              "item": "Chicken",
+              "amount": "150g"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        },
+        {
+          "type": "dinner",
+          "name": "Dal Makhani",
+          "cuisine": "Indian",
+          "calories": 700,
+          "nutrition": {
+            "protein": "25g",
+            "carbs": "60g",
+            "fat": "30g"
+          },
+          "ingredients": [
+            {
+              "item": "Lentils",
+              "amount": "150g"
+            },
+            {
+              "item": "Cream",
+              "amount": "50g"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        }
+      ],
+      "total_calories": 2000
+    },
+    {
+      "day": 4,
+      "meals": [
+        {
+          "type": "breakfast",
+          "name": "Masala Dosa",
+          "cuisine": "Indian",
+          "calories": 600,
+          "nutrition": {
+            "protein": "15g",
+            "carbs": "80g",
+            "fat": "20g"
+          },
+          "ingredients": [
+            {
+              "item": "Dosa batter",
+              "amount": "150g"
+            },
+            {
+              "item": "Potato filling",
+              "amount": "100g"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        },
+        {
+          "type": "lunch",
+          "name": "Paneer Butter Masala",
+          "cuisine": "Indian",
+          "calories": 700,
+          "nutrition": {
+            "protein": "30g",
+            "carbs": "70g",
+            "fat": "30g"
+          },
+          "ingredients": [
+            {
+              "item": "Paneer",
+              "amount": "150g"
+            },
+            {
+              "item": "Butter",
+              "amount": "50g"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        },
+        {
+          "type": "dinner",
+          "name": "Tandoori Chicken",
+          "cuisine": "Indian",
+          "calories": 700,
+          "nutrition": {
+            "protein": "30g",
+            "carbs": "50g",
+            "fat": "35g"
+          },
+          "ingredients": [
+            {
+              "item": "Chicken",
+              "amount": "200g"
+            },
+            {
+              "item": "Tandoori masala",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        }
+      ],
+      "total_calories": 2000
+    },
+    {
+      "day": 5,
+      "meals": [
+        {
+          "type": "breakfast",
+          "name": "Poha",
+          "cuisine": "Indian",
+          "calories": 600,
+          "nutrition": {
+            "protein": "10g",
+            "carbs": "90g",
+            "fat": "15g"
+          },
+          "ingredients": [
+            {
+              "item": "Flat rice",
+              "amount": "150g"
+            },
+            {
+              "item": "Peas",
+              "amount": "50g"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        },
+        {
+          "type": "lunch",
+          "name": "Rajma Masala",
+          "cuisine": "Indian",
+          "calories": 700,
+          "nutrition": {
+            "protein": "20g",
+            "carbs": "90g",
+            "fat": "25g"
+          },
+          "ingredients": [
+            {
+              "item": "Kidney beans",
+              "amount": "150g"
+            },
+            {
+              "item": "Onions",
+              "amount": "100g"
+            },
+            {
+              "item": "Tomatoes",
+              "amount": "100g"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        },
+        {
+          "type": "dinner",
+          "name": "Methi Malai Paneer",
+          "cuisine": "Indian",
+          "calories": 700,
+          "nutrition": {
+            "protein": "20g",
+            "carbs": "60g",
+            "fat": "35g"
+          },
+          "ingredients": [
+            {
+              "item": "Paneer",
+              "amount": "100g"
+            },
+            {
+              "item": "Fenugreek leaves",
+              "amount": "200g"
+            },
+            {
+              "item": "Cream",
+              "amount": "50g"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        }
+      ],
+      "total_calories": 2000
+    },
+    {
+      "day": 6,
+      "meals": [
+        {
+          "type": "breakfast",
+          "name": "Aloo Parantha",
+          "cuisine": "Indian",
+          "calories": 600,
+          "nutrition": {
+            "protein": "15g",
+            "carbs": "85g",
+            "fat": "20g"
+          },
+          "ingredients": [
+            {
+              "item": "Whole wheat flour",
+              "amount": "100g"
+            },
+            {
+              "item": "Potato",
+              "amount": "100g"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        },
+        {
+          "type": "lunch",
+          "name": "Chicken Biryani",
+          "cuisine": "Indian",
+          "calories": 700,
+          "nutrition": {
+            "protein": "25g",
+            "carbs": "90g",
+            "fat": "30g"
+          },
+          "ingredients": [
+            {
+              "item": "Chicken",
+              "amount": "150g"
+            },
+            {
+              "item": "Basmati Rice",
+              "amount": "150g"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        },
+        {
+          "type": "dinner",
+          "name": "Fish Fry",
+          "cuisine": "Indian",
+          "calories": 700,
+          "nutrition": {
+            "protein": "25g",
+            "carbs": "50g",
+            "fat": "40g"
+          },
+          "ingredients": [
+            {
+              "item": "Fish",
+              "amount": "200g"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        }
+      ],
+      "total_calories": 2000
+    },
+    {
+      "day": 7,
+      "meals": [
+        {
+          "type": "breakfast",
+          "name": "Vegetable Uttapam",
+          "cuisine": "Indian",
+          "calories": 600,
+          "nutrition": {
+            "protein": "15g",
+            "carbs": "80g",
+            "fat": "20g"
+          },
+          "ingredients": [
+            {
+              "item": "Uttapam batter",
+              "amount": "150g"
+            },
+            {
+              "item": "Mixed vegetables",
+              "amount": "100g"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        },
+        {
+          "type": "lunch",
+          "name": "Matar Paneer",
+          "cuisine": "Indian",
+          "calories": 700,
+          "nutrition": {
+            "protein": "25g",
+            "carbs": "80g",
+            "fat": "30g"
+          },
+          "ingredients": [
+            {
+              "item": "Paneer",
+              "amount": "100g"
+            },
+            {
+              "item": "Peas",
+              "amount": "100g"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        },
+        {
+          "type": "dinner",
+          "name": "Dal Tadka",
+          "cuisine": "Indian",
+          "calories": 700,
+          "nutrition": {
+            "protein": "25g",
+            "carbs": "60g",
+            "fat": "30g"
+          },
+          "ingredients": [
+            {
+              "item": "Lentils",
+              "amount": "150g"
+            },
+            {
+              "item": "Onions",
+              "amount": "50g"
+            },
+            {
+              "item": "Spices",
+              "amount": "to taste"
+            }
+          ],
+          "recipe_steps": [
+            "Recipe will be provided separately"
+          ]
+        }
+      ],
+      "total_calories": 2000
+    }
+  ]
+}

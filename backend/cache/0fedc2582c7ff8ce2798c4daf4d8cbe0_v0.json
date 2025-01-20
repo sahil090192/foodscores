@@ -1,0 +1,77 @@
+{
+  "meal_plan": [
+    {
+      "day": 1,
+      "meals": [
+        {
+          "type": "breakfast",
+          "name": "Oats Idli",
+          "cuisine": "Indian",
+          "calories": 500,
+          "nutrition": {
+            "protein": "10g",
+            "carbs": "70g",
+            "fat": "12g"
+          }
+        },
+        {
+          "type": "morning snack",
+          "name": "Stir Fry Veggies",
+          "cuisine": "Chinese",
+          "calories": 300,
+          "nutrition": {
+            "protein": "8g",
+            "carbs": "35g",
+            "fat": "10g"
+          }
+        },
+        {
+          "type": "lunch",
+          "name": "Chana Dal with Mixed Vegetables",
+          "cuisine": "Indian",
+          "calories": 700,
+          "nutrition": {
+            "protein": "20g",
+            "carbs": "80g",
+            "fat": "20g"
+          }
+        },
+        {
+          "type": "afternoon snack",
+          "name": "Steamed Chicken Dumplings",
+          "cuisine": "Chinese",
+          "calories": 300,
+          "nutrition": {
+            "protein": "15g",
+            "carbs": "30g",
+            "fat": "10g"
+          }
+        },
+        {
+          "type": "dinner",
+          "name": "Mushroom Fried Rice with Stir Fry Tofu",
+          "cuisine": "Chinese",
+          "calories": 800,
+          "nutrition": {
+            "protein": "25g",
+            "carbs": "100g",
+            "fat": "25g"
+          }
+        },
+        {
+          "type": "evening snack",
+          "name": "Green Salad with Yogurt Dressing",
+          "cuisine": "Indian",
+          "calories": 400,
+          "nutrition": {
+            "protein": "12g",
+            "carbs": "50g",
+            "fat": "12g"
+          }
+        }
+      ],
+      "total_calories": 3000
+    }
+  ],
+  "generation_time": 14.930274724960327
+}

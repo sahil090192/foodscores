@@ -179,6 +179,16 @@ function MealPlanForm() {
     }
   };
 
+  const handleCuisinePercentageChange = (cuisine, percentage) => {
+    const updatedPreferences = formData.cuisinePreferences.map(pref => {
+      if (pref.startsWith(cuisine)) {
+        return `${cuisine}:${percentage}%`;
+      }
+      return pref;
+    });
+    setFormData({ ...formData, cuisinePreferences: updatedPreferences });
+  };
+
   const downloadCSV = () => {
     if (!mealPlan) return;
 
@@ -268,19 +278,50 @@ function MealPlanForm() {
       case 3:
         return (
           <div className="form-step">
-            <h3>Select your preferred cuisines:</h3>
-            <div className="checkbox-group">
+            <h3>Select your preferred cuisines and their proportions:</h3>
+            <div className="cuisine-selection">
               {cuisineTypes.map(cuisine => (
-                <label key={cuisine} className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    name="cuisinePreferences"
-                    value={cuisine}
-                    checked={formData.cuisinePreferences.includes(cuisine)}
-                    onChange={handleInputChange}
-                  />
-                  {cuisine}
-                </label>
+                <div key={cuisine} className="cuisine-option">
+                  <label className="checkbox-label">
+                    <input
+                      type="checkbox"
+                      name="cuisinePreferences"
+                      value={cuisine}
+                      checked={formData.cuisinePreferences.some(pref => pref.startsWith(cuisine))}
+                      onChange={(e) => {
+                        const updatedPreferences = e.target.checked
+                          ? [...formData.cuisinePreferences, `${cuisine}:${100 / (formData.cuisinePreferences.length + 1)}%`]
+                          : formData.cuisinePreferences.filter(pref => !pref.startsWith(cuisine));
+                        
+                        // Recalculate percentages to total 100%
+                        if (updatedPreferences.length > 0) {
+                          const equalPercentage = Math.floor(100 / updatedPreferences.length);
+                          const adjustedPreferences = updatedPreferences.map((pref, index) => {
+                            const cuisine = pref.split(':')[0];
+                            const percentage = index === updatedPreferences.length - 1 
+                              ? 100 - (equalPercentage * (updatedPreferences.length - 1))
+                              : equalPercentage;
+                            return `${cuisine}:${percentage}%`;
+                          });
+                          setFormData({ ...formData, cuisinePreferences: adjustedPreferences });
+                        } else {
+                          setFormData({ ...formData, cuisinePreferences: [] });
+                        }
+                      }}
+                    />
+                    {cuisine}
+                  </label>
+                  {formData.cuisinePreferences.some(pref => pref.startsWith(cuisine)) && (
+                    <input
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={parseInt(formData.cuisinePreferences.find(pref => pref.startsWith(cuisine)).split(':')[1])}
+                      onChange={(e) => handleCuisinePercentageChange(cuisine, e.target.value)}
+                      className="percentage-input"
+                    />
+                  )}
+                </div>
               ))}
             </div>
             {errors.cuisinePreferences && <div className="error-message">{errors.cuisinePreferences}</div>}
@@ -308,6 +349,37 @@ function MealPlanForm() {
     }
   };
 
+  const renderMealTable = (meals, dayNumber) => {
+    return (
+      <table className="meal-table">
+        <thead>
+          <tr>
+            <th>Meal</th>
+            <th>Name</th>
+            <th>Cuisine</th>
+            <th>Calories</th>
+            <th>Nutrition</th>
+          </tr>
+        </thead>
+        <tbody>
+          {meals.map((meal, index) => (
+            <tr key={index}>
+              <td>{meal.type}</td>
+              <td>{meal.name}</td>
+              <td>{meal.cuisine}</td>
+              <td>{meal.calories}</td>
+              <td>
+                Protein: {meal.nutrition.protein}<br />
+                Carbs: {meal.nutrition.carbs}<br />
+                Fat: {meal.nutrition.fat}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  };
+
   const renderResults = () => {
     if (error) {
       return (
@@ -325,77 +397,14 @@ function MealPlanForm() {
       return (
         <div className="meal-plan-results">
           <h3>Your Custom Meal Plan</h3>
+          <div className="disclaimer">
+            ⚠️ Disclaimer: The nutritional information provided is an estimate. Please verify these values with other sources if they seem incorrect.
+          </div>
           {mealPlan.meal_plan.map((day, index) => (
             <div key={index} className="day-plan">
               <h4>Day {day.day}</h4>
               <div className="meal-plan-container">
-                <table className="meal-table">
-                  <thead>
-                    <tr>
-                      <th>Meal Type</th>
-                      <th>Dish Name</th>
-                      <th>Cuisine</th>
-                      <th>Calories</th>
-                      <th>Protein</th>
-                      <th>Carbs</th>
-                      <th>Fat</th>
-                      <th>Details</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {day.meals.map((meal, mealIndex) => (
-                      <React.Fragment key={mealIndex}>
-                        <tr>
-                          <td className="meal-type">{meal.type}</td>
-                          <td className="meal-name">{meal.name}</td>
-                          <td className="cuisine">{meal.cuisine}</td>
-                          <td>{meal.calories}</td>
-                          <td>{meal.nutrition.protein}</td>
-                          <td>{meal.nutrition.carbs}</td>
-                          <td>{meal.nutrition.fat}</td>
-                          <td>
-                            <button 
-                              className="details-button"
-                              onClick={() => {
-                                const element = document.getElementById(`recipe-${day.day}-${mealIndex}`);
-                                element.style.display = element.style.display === 'none' ? 'block' : 'none';
-                              }}
-                            >
-                              Show Recipe
-                            </button>
-                          </td>
-                        </tr>
-                        <tr id={`recipe-${day.day}-${mealIndex}`} className="recipe-details" style={{display: 'none'}}>
-                          <td colSpan="8">
-                            <div className="recipe-content">
-                              <div className="ingredients">
-                                <h5>Ingredients:</h5>
-                                <ul>
-                                  {meal.ingredients.map((ing, i) => (
-                                    <li key={i}>{ing.amount} {ing.item}</li>
-                                  ))}
-                                </ul>
-                              </div>
-                              <div className="recipe-steps">
-                                <h5>Recipe Steps:</h5>
-                                <ol>
-                                  {meal.recipe_steps.map((step, i) => (
-                                    <li key={i}>{step}</li>
-                                  ))}
-                                </ol>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                      </React.Fragment>
-                    ))}
-                    <tr className="total-row">
-                      <td colSpan="3">Daily Total</td>
-                      <td>{day.total_calories}</td>
-                      <td colSpan="4"></td>
-                    </tr>
-                  </tbody>
-                </table>
+                {renderMealTable(day.meals, day.day)}
               </div>
             </div>
           ))}
@@ -412,6 +421,9 @@ function MealPlanForm() {
             >
               Generate New Plan
             </button>
+          </div>
+          <div className="generation-time">
+            Request completed in {mealPlan.generation_time.toFixed(2)} seconds
           </div>
         </div>
       );

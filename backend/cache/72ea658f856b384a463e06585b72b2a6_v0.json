@@ -1,0 +1,113 @@
+{
+  "meal_plan": [
+    {
+      "day": 1,
+      "meals": [
+        {
+          "type": "breakfast",
+          "name": "Moong Dal Dosa",
+          "cuisine": "Indian",
+          "calories": 300,
+          "nutrition": {
+            "protein": "12g",
+            "carbs": "40g",
+            "fat": "10g"
+          },
+          "ingredients": [
+            {
+              "item": "Moong Dal",
+              "amount": "1 cup"
+            },
+            {
+              "item": "Salt",
+              "amount": "To taste"
+            },
+            {
+              "item": "Oil",
+              "amount": "1 tsp"
+            }
+          ],
+          "recipe_steps": []
+        },
+        {
+          "type": "lunch",
+          "name": "Rajma Chawal",
+          "cuisine": "Indian",
+          "calories": 700,
+          "nutrition": {
+            "protein": "20g",
+            "carbs": "110g",
+            "fat": "15g"
+          },
+          "ingredients": [
+            {
+              "item": "Rajma (Kidney Beans)",
+              "amount": "1 cup"
+            },
+            {
+              "item": "Basmati Rice",
+              "amount": "1 cup"
+            },
+            {
+              "item": "Onion",
+              "amount": "1"
+            },
+            {
+              "item": "Tomato",
+              "amount": "1"
+            },
+            {
+              "item": "Spices",
+              "amount": "To taste"
+            },
+            {
+              "item": "Oil",
+              "amount": "2 tsp"
+            }
+          ],
+          "recipe_steps": []
+        },
+        {
+          "type": "dinner",
+          "name": "Palak Paneer",
+          "cuisine": "Indian",
+          "calories": 1000,
+          "nutrition": {
+            "protein": "30g",
+            "carbs": "60g",
+            "fat": "50g"
+          },
+          "ingredients": [
+            {
+              "item": "Paneer",
+              "amount": "200g"
+            },
+            {
+              "item": "Spinach",
+              "amount": "1 bunch"
+            },
+            {
+              "item": "Onion",
+              "amount": "1"
+            },
+            {
+              "item": "Tomato",
+              "amount": "1"
+            },
+            {
+              "item": "Spices",
+              "amount": "To taste"
+            },
+            {
+              "item": "Oil",
+              "amount": "2 tsp"
+            }
+          ],
+          "recipe_steps": []
+        }
+      ],
+      "total_calories": 2000
+    }
+  ],
+  "generation_time": 20.205430030822754
+}
